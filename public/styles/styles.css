@@ -1,0 +1,81 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+body {
+  /* border: 2px solid black; */
+  margin: 0;
+  padding: 10px;
+}
+
+label,
+input {
+  display: block;
+  margin-bottom: 10px;
+}
+
+label {
+  margin-bottom: 10px;
+}
+
+input {
+  width: 100%;
+  max-width: 300px;
+}
+
+button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-brand {
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.nav-menu {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.nav-menu:active {
+  font-size: 14px;
+}
+
+.link-action a {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.intro {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.flexbox {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-link {
+  text-decoration: none;
+}
+
+/* ||Utilities */
+.mr-10 {
+  margin-right: 10px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
