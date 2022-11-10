@@ -9,6 +9,7 @@
     <title>Document</title>
   </head>
   <body>
+    <div class="container">
     <nav class="nav">
       <div class="nav-brand">
         <a class="btn-link" href="/">ExpenShare</a>
@@ -18,7 +19,7 @@
         <!-- Menu -->
         <% if(user) { %>
         <form action="/logout" method="post">
-          <button type="submit">Log Out</button>
+            <button class="btn-logout" type="submit">Log Out</button>
         </form>
         <% } else { %>
         <a class="mr-10 btn" href="/login">Login</a>
