@@ -248,9 +248,7 @@ app.post("/register", (req, res) => {
       if (err) {
         console.log("Error: " + err);
       } else {
-        // req.flash("success", "User registered!");
-        console.log("User registered");
-        res.redirect("/login");
+        res.redirect("/");
       }
     }
   );
