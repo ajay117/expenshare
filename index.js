@@ -124,12 +124,12 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// mongoose.connect("mongodb://localhost:27017/expense-share");
+mongoose.connect("mongodb://localhost:27017/expense-share");
 
-const clusterPassword = process.env.MONGO_DB_CLUSTER_PWD;
-mongoose.connect(
-  `mongodb+srv://meajay64:${clusterPassword}@expenseshare.z2heqoo.mongodb.net/?retryWrites=true&w=majority`
-);
+// const clusterPassword = process.env.MONGO_DB_CLUSTER_PWD;
+// mongoose.connect(
+//   `mongodb+srv://meajay64:${clusterPassword}@expenseshare.z2heqoo.mongodb.net/?retryWrites=true&w=majority`
+// );
 
 // Get Routes
 app.get("/", (req, res) => {
@@ -137,7 +137,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/register", (req, res) => {
-  res.render("register");
+  res.render("register", { user: req.user });
 });
 
 app.get("/login", (req, res) => {
@@ -154,12 +154,12 @@ app.get("/admin/:id", (req, res) => {
 
 app.get("/groups", async (req, res) => {
   const groups = await Group.find();
-  res.render("groups", { groups: groups, user: req.user });
+  res.render("groups/groups", { groups: groups, user: req.user });
 });
 
 app.get("/groups/new", (req, res) => {
   if (req.user) {
-    res.render("new", { user: req.user });
+    res.render("groups/new", { user: req.user });
   } else {
     console.log("Please log in");
     res.redirect("/login");
@@ -195,7 +195,7 @@ app.get("/groups/:groupId", async (req, res) => {
     }
   });
 
-  res.render("group", {
+  res.render("groups/group", {
     groupObj: groupObj,
     total: total,
     individualTotalExp: individualTotalExp,
