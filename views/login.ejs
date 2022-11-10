@@ -5,8 +5,17 @@
     <label for="username">Username</label>
     <input type="text" id="username" placeholder="username" name="username" />
 
-    <label for="password">Password</label>
+    <div class="flex-container">
+      <label for="password">Password</label>
+      <span
+        class="tooltip"
+        data-tooltip="Password (UpperCase, LowerCase, Number/SpecialChar and min 8 Chars)"
+        >?</span
+      >
+    </div>
     <input
+      class="mt-20"
+      pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
       type="password"
       id="password"
       placeholder="password"
