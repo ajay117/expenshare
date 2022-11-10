@@ -10,7 +10,6 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const passport = require("passport");
 const flash = require("connect-flash");
 
-
 app.use(express.static(__dirname + "/public"));
 app.use(
   express.urlencoded({
@@ -37,13 +36,6 @@ app.use((req, res, next) => {
 //Configure passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
-
-//Schemas
-// const transactionSchema = new mongoose.Schema({
-//   member: String,
-//   item: String,
-//   price:
-// })
 
 const groupSchema = new mongoose.Schema({
   groupName: String,
