@@ -1,0 +1,36 @@
+<%- include('../partials/head') %>
+
+<form action="/groups" method="post">
+  <label for="group_name">Group Name</label>
+  <input
+    id="group_name"
+    type="text"
+    placeholder="Group name"
+    name="group_name"
+  />
+  <button class="add_member" type="button">Add member</button>
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+  const addMemberBtn = document.querySelector(".add_member");
+  let count = 1;
+  addMemberBtn.addEventListener("click", () => {
+    let parent = addMemberBtn.parentNode;
+    let input = document.createElement("input");
+    let label = document.createElement("label");
+    input.type = "text";
+    input.name = `member${count}`;
+    input.id = `member${count}`;
+    input.placeholder = "Member name";
+
+    label.htmlFor = `member${count}`;
+    label.textContent = `Member ${count}`;
+
+    parent.insertBefore(input, addMemberBtn);
+    parent.insertBefore(label, input);
+    count += 1;
+  });
+</script>
+
+<%- include('../partials/foot') %>
