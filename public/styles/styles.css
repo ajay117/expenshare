@@ -50,6 +50,7 @@ table {
 button {
   margin-top: 10px;
   margin-bottom: 10px;
+  font-size: 18px;
 }
 
 .nav {
@@ -141,6 +142,26 @@ button {
   font-size: 17px;
   padding: 5px 25px;
   border-radius: 15px;
+}
+
+.alert-success,
+.alert-error {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  color: white;
+}
+
+.alert-success {
+  background-color: rgb(37, 41, 224);
+}
+
+.alert-error {
+  background-color: rgb(238, 68, 25);
+}
+
+.hide {
+  display: none;
 }
 
 /* --ToolTip-- */
