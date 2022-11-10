@@ -194,12 +194,11 @@ app.get("/groups/:groupId", async (req, res) => {
       }
     }
   });
-
   res.render("groups/group", {
     groupObj: groupObj,
     total: total,
     individualTotalExp: individualTotalExp,
-    admin: req.user,
+    admin: req.user ? req.user._id.equals(groupObj.admin) : false,
     user: req.user,
   });
 });
