@@ -85,6 +85,7 @@ app.use(
 app.use(flash());
 
 app.set("view engine", "ejs");
+
 app.use((req, res, next) => {
   res.locals.message = req.flash();
   next();
@@ -246,16 +247,16 @@ app.post("/register", (req, res) => {
     req.body.password,
     (err) => {
       if (err) {
-        console.log("Error: " + err);
+        req.flash("error", "User is already registered");
       } else {
-        res.redirect("/");
+        req.flash("success", "Successfully Registered!");
+        res.redirect("/login");
       }
     }
   );
 });
 
 app.post("/groups/transaction", async (req, res) => {
-  console.log(req.body);
   let { member, item, price, date, groupId } = req.body;
   price = parseInt(price);
 
@@ -268,6 +269,8 @@ app.post("/groups/transaction", async (req, res) => {
   });
 
   await group.save();
+
+  req.flash("success", "Transaction successfully recorded");
 
   res.redirect("/groups/" + groupId);
 });
