@@ -1,6 +1,6 @@
 <%- include('../partials/head') %>
 
-<form action="/groups" method="post">
+<form class="form" action="/groups" method="post">
   <label for="group_name">Group Name</label>
   <input
     id="group_name"
@@ -8,8 +8,10 @@
     placeholder="Group name"
     name="group_name"
   />
-  <button class="add_member" type="button">Add member</button>
-  <button type="submit">Submit</button>
+  <div>
+    <button class="add_member md-btn" type="button">Add member</button>
+    <button class="md-btn" type="submit">Submit</button>
+  </div>
 </form>
 
 <script>
