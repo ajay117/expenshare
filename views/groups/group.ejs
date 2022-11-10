@@ -42,7 +42,10 @@
   <tr>
     <td><%= key %></td>
     <td><%= individualTotalExp[key] %></td>
-    <td><%= individualTotalExp[key] - (total / groupObj.member.length) %></td>
+    <td>
+      <%= Math.round(individualTotalExp[key] - (total / groupObj.member.length))
+      %>
+    </td>
   </tr>
   <% } %>
   <tr>
@@ -56,12 +59,12 @@
 <br />
 
 <% if(admin) { %>
-<form action="/groups/transaction" method="post">
+<form class="form" action="/groups/transaction" method="post">
   <fieldset>
     <legend>Add Transaction</legend>
     <label for="member">Member Name</label>
     <select id="member" name="member">
-      <option value="">Please choose an option</option>
+      <option value="">Please choose a member</option>
       <% (groupObj.member).forEach(person => {%>
       <option value="<%= person %>"><%= person %></option>
       <% }) %>
@@ -83,7 +86,7 @@
 
     <input type="hidden" name="groupId" value="<%= groupObj._id %>" <br />
 
-    <button type="submit">Submit</button>
+    <button class="md-btn" type="submit">Add Transaction</button>
   </fieldset>
 </form>
 
