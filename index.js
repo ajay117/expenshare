@@ -10,63 +10,6 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const passport = require("passport");
 const flash = require("connect-flash");
 
-// const groups = [
-//   {
-//     groupName: "ABC",
-//     admin: "RC",
-//     member: ["Babu", "Ajay", "Hemanta", "RC"],
-//     transaction: [
-//       {
-//         member: "RC",
-//         date: "2020-03-11",
-//         item: "Hanaro",
-//         price: 200000,
-//       },
-//       {
-//         member: "Ajay",
-//         date: "2020-03-11",
-//         item: "Hanaro",
-//         price: 80000,
-//       },
-//       {
-//         member: "Ajay",
-//         date: "2020-03-11",
-//         item: "Hanaro",
-//         price: 200000,
-//       },
-//       {
-//         member: "Ajay",
-//         date: "2020-03-11",
-//         item: "Hanaro",
-//         price: 200000,
-//       },
-//     ],
-//   },
-//   {
-//     groupName: "ABC2",
-//     admin: "Ajay",
-//     member: ["Sanjay", "Bikash", "Hari", "Ramesh"],
-//     transaction: [
-//       {
-//         member: "Hari",
-//         date: "2020/12/11",
-//         item: "Hanaro",
-//         price: 200000,
-//       },
-//     ],
-//   },
-// ];
-
-// const adminList = [
-//   {
-//     name: "RC",
-//     groupName: "ABC",
-//   },
-//   {
-//     name: "Ajay",
-//     groupName: "ABC2",
-//   },
-// ];
 
 app.use(express.static(__dirname + "/public"));
 app.use(
