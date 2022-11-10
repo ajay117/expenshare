@@ -1,99 +1,122 @@
 <%- include('../partials/head') %>
 
-<h1>Group:- <%= groupObj.groupName %></h1>
+<!-- <% if(message.success) { %>
+<div class="alert alert-success">
+  <% } else { %>
+  <div class="alert alert-error">
+    <% } %>
+    <p><% message.success || message.error %></p>
+    <p>
+      <svg
+        class="close-icon"
+        fill="white"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="24px"
+        height="24px"
+      >
+        <path
+          d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z"
+        />
+      </svg>
+    </p>
+  </div> -->
 
-<!-- <% for(let key in groupObj) { if(key !== 'transaction') {%>
+  <h1 class="heading-text"><%= groupObj.groupName %></h1>
+
+  <!-- <% for(let key in groupObj) { if(key !== 'transaction') {%>
 <li><%= groupObj[key] %></li>
 <% } } %> -->
 
-<table>
-  <thead>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Item</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+
+    <%(groupObj.transaction).forEach(obj => { %>
     <tr>
-      <th>Name</th>
-      <th>Date</th>
-      <th>Item</th>
-      <th>Price</th>
+      <td><%= obj.member %></td>
+      <td><%= obj.date %></td>
+      <td><%= obj.item %></td>
+      <td><%= obj.price %></td>
     </tr>
-  </thead>
+    <%}) %>
+    <tr>
+      <td colspan="3">Total</td>
+      <td><%= total %></td>
+    </tr>
+  </table>
 
-  <%(groupObj.transaction).forEach(obj => { %>
-  <tr>
-    <td><%= obj.member %></td>
-    <td><%= obj.date %></td>
-    <td><%= obj.item %></td>
-    <td><%= obj.price %></td>
-  </tr>
-  <%}) %>
-  <tr>
-    <td colspan="3">Total</td>
-    <td><%= total %></td>
-  </tr>
-</table>
+  <p>Total individual expenditure</p>
 
-<p>Total individual expenditure</p>
+  <table>
+    <tr>
+      <td>Name</td>
+      <td>Total</td>
+      <td>Result</td>
+    </tr>
+    <% for(let key in individualTotalExp) { %>
+    <tr>
+      <td><%= key %></td>
+      <td><%= individualTotalExp[key] %></td>
+      <td>
+        <%= Math.round(individualTotalExp[key] - (total /
+        groupObj.member.length)) %>
+      </td>
+    </tr>
+    <% } %>
+    <tr>
+      <td>Total</td>
+      <td><%= total %></td>
+    </tr>
+  </table>
 
-<table>
-  <tr>
-    <td>Name</td>
-    <td>Total</td>
-    <td>Result</td>
-  </tr>
-  <% for(let key in individualTotalExp) { %>
-  <tr>
-    <td><%= key %></td>
-    <td><%= individualTotalExp[key] %></td>
-    <td>
-      <%= Math.round(individualTotalExp[key] - (total / groupObj.member.length))
-      %>
-    </td>
-  </tr>
+  <br />
+  <br />
+  <br />
+
+  <% if(admin) { %>
+  <form class="form" action="/groups/transaction" method="post">
+    <fieldset>
+      <legend>Add Transaction</legend>
+      <label for="member">Member Name</label>
+      <select id="member" name="member">
+        <option value="">Please choose a member</option>
+        <% (groupObj.member).forEach(person => {%>
+        <option value="<%= person %>"><%= person %></option>
+        <% }) %>
+      </select>
+      <label
+        >Item
+        <input type="text" placeholder="Expense item" name="item" />
+      </label>
+
+      <label
+        >Price
+        <input type="number" placeholder="price" name="price" />
+      </label>
+
+      <label
+        >Date
+        <input type="date" name="date" />
+      </label>
+
+      <input type="hidden" name="groupId" value="<%= groupObj._id %>" <br />
+
+      <button class="md-btn" type="submit">Add Transaction</button>
+    </fieldset>
+  </form>
+
   <% } %>
-  <tr>
-    <td>Total</td>
-    <td><%= total %></td>
-  </tr>
-</table>
 
-<br />
-<br />
-<br />
+  <br />
 
-<% if(admin) { %>
-<form class="form" action="/groups/transaction" method="post">
-  <fieldset>
-    <legend>Add Transaction</legend>
-    <label for="member">Member Name</label>
-    <select id="member" name="member">
-      <option value="">Please choose a member</option>
-      <% (groupObj.member).forEach(person => {%>
-      <option value="<%= person %>"><%= person %></option>
-      <% }) %>
-    </select>
-    <label
-      >Item
-      <input type="text" placeholder="Expense item" name="item" />
-    </label>
+  <script></script>
 
-    <label
-      >Price
-      <input type="number" placeholder="price" name="price" />
-    </label>
-
-    <label
-      >Date
-      <input type="date" name="date" />
-    </label>
-
-    <input type="hidden" name="groupId" value="<%= groupObj._id %>" <br />
-
-    <button class="md-btn" type="submit">Add Transaction</button>
-  </fieldset>
-</form>
-
-<% } %>
-
-<br />
-
-<script></script>
-
-<%- include('../partials/foot') %>
+  <%- include('../partials/foot') %>
+</div>
