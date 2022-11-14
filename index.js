@@ -51,6 +51,9 @@ const userSchema = new mongoose.Schema({
   password: String,
 });
 
+// const options = {
+
+// }
 userSchema.plugin(passportLocalMongoose);
 
 //Configure passport-local to use account model for authentication
@@ -60,12 +63,12 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// mongoose.connect("mongodb://localhost:27017/expense-share");
+mongoose.connect("mongodb://localhost:27017/expense-share");
 
-const clusterPassword = process.env.MONGO_DB_CLUSTER_PWD;
-mongoose.connect(
-  `mongodb+srv://meajay64:${clusterPassword}@expenseshare.z2heqoo.mongodb.net/?retryWrites=true&w=majority`
-);
+// const clusterPassword = process.env.MONGO_DB_CLUSTER_PWD;
+// mongoose.connect(
+//   `mongodb+srv://meajay64:${clusterPassword}@expenseshare.z2heqoo.mongodb.net/?retryWrites=true&w=majority`
+// );
 
 // Get Routes
 app.get("/", (req, res) => {
@@ -77,7 +80,7 @@ app.get("/register", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  res.render("login", { user: req.user });
+  res.render("login", { user: req.user, error: req.flash("error") });
 });
 
 app.get("/admin/:id", (req, res) => {
@@ -183,9 +186,10 @@ app.post("/register", (req, res) => {
     (err) => {
       if (err) {
         req.flash("error", "User is already registered");
+        res.redirect("/register");
       } else {
         req.flash("success", "Successfully Registered!");
-        res.redirect("/login");
+        
       }
     }
   );
@@ -212,12 +216,11 @@ app.post("/groups/transaction", async (req, res) => {
 
 app.post(
   "/login",
-  passport.authenticate("local", { failureRedirect: "/login" }),
-  (req, res) => {
-    req.flash("success", "Successfully logged in!");
-    console.log("logged in");
-    res.redirect("/admin/" + req.user._id);
-  }
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/login",
+    failureFlash: { type: "error", message: "Invalid username or password" },
+  })
 );
 
 app.post("/logout", (req, res) => {
