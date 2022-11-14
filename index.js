@@ -51,10 +51,13 @@ const userSchema = new mongoose.Schema({
   password: String,
 });
 
-// const options = {
-
-// }
-userSchema.plugin(passportLocalMongoose);
+const options = {
+  errorMessages: {
+    IncorrectPasswordError: "Username or Password is incorrect",
+    IncorrectUsernameError: "Username or Password is incorrect",
+  },
+};
+userSchema.plugin(passportLocalMongoose, options);
 
 //Configure passport-local to use account model for authentication
 const User = mongoose.model("User", userSchema);
@@ -80,7 +83,7 @@ app.get("/register", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  res.render("login", { user: req.user, error: req.flash("error") });
+  res.render("login", { user: req.user });
 });
 
 app.get("/admin/:id", (req, res) => {
@@ -221,7 +224,8 @@ app.post(
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/login",
-    failureFlash: { type: "error", message: "Invalid username or password" },
+    successFlash: { type: "success", message: "Welcome" },
+    failureFlash: { type: "error", message: "Invalid username or password." },
   })
 );
 
