@@ -188,8 +188,10 @@ app.post("/register", (req, res) => {
         req.flash("error", "User is already registered");
         res.redirect("/register");
       } else {
-        req.flash("success", "Successfully Registered!");
-        
+        passport.authenticate("local")(req, res, function () {
+          req.flash("success", "Successfully Registered!");
+          res.redirect("/");
+        });
       }
     }
   );

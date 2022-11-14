@@ -1,28 +1,25 @@
 <%- include('partials/head') %> 
 
-<% if(message.success) { %>
-<div class="alert alert-success hide">
-  <% } else { %>
-  <div class="alert alert-error hide">
-    <% } %>
-    <p>
-      <% message.success || message.error %>
-    </p>
-    <p>
-      <svg
-        class="close-icon"
-        fill="white"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        width="24px"
-        height="24px"
-      >
-        <path
-          d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z"
-        />
-      </svg>
-    </p>
-  </div>
+<% if(Object.keys(message).length > 0 && message.success) { %>
+    <div class="alert-success">
+      <p><%= message.success[0] %></p>
+      <p>
+        <svg
+          class="close-icon"
+          fill="white"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="24px"
+          height="24px"
+        >
+          <path
+            d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z"
+          />
+        </svg>
+      </p>
+    </div>
+<% } %>
+
 
   <p class="intro">ExpenShare to add and share your cost with friends.</p>
   <h2 class="heading-text">Feautures:-</h2>
@@ -41,9 +38,9 @@
 </div>
 
 <script>
-  let closeIcon = document.querySelector(".close-icon");
-  let alertBox = document.querySelector(".alert");
-  closeIcon.addEventListener("click", () => {
-    alertBox.classList.add("hide");
-  });
+  // let closeIcon = document.querySelector(".close-icon");
+  // let alertBox = document.querySelector(".alert");
+  // closeIcon.addEventListener("click", () => {
+  //   alertBox.classList.add("hide");
+  // });
 </script>
