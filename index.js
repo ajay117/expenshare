@@ -66,12 +66,12 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-mongoose.connect("mongodb://localhost:27017/expense-share");
+// mongoose.connect("mongodb://localhost:27017/expense-share");
 
-// const clusterPassword = process.env.MONGO_DB_CLUSTER_PWD;
-// mongoose.connect(
-//   `mongodb+srv://meajay64:${clusterPassword}@expenseshare.z2heqoo.mongodb.net/?retryWrites=true&w=majority`
-// );
+const clusterPassword = process.env.MONGO_DB_CLUSTER_PWD;
+mongoose.connect(
+  `mongodb+srv://meajay64:${clusterPassword}@expenseshare.z2heqoo.mongodb.net/?retryWrites=true&w=majority`
+);
 
 // Get Routes
 app.get("/", (req, res) => {
