@@ -150,6 +150,7 @@ button {
   justify-content: space-between;
   padding: 0 20px;
   color: white;
+  margin-bottom: 20px;
 }
 
 .alert-success {
@@ -215,7 +216,7 @@ x
 
 
 /* ||Utilities */
-.mr-10 {
+.mr-10 {  
   margin-right: 10px;
 }
 
@@ -233,4 +234,14 @@ x
 
 .mr-auto {
   margin: 0 auto;
+}
+
+.pv-10 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.ph-20 {
+  padding-left: 20px;
+  padding-right: 20px;
 }
