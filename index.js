@@ -74,7 +74,7 @@ async function connectDb() {
   await mongoose.connect(
     "mongodb+srv://meajay64:" +
       clusterPassword +
-      "@expenseshare.z2heqoo.mongodb.net/?retryWrites=true&w=majority"
+      "@expenseshare.z2heqoo.mongodb.net/expense-share?retryWrites=true&w=majority"
   );
 }
 
