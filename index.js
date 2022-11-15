@@ -69,9 +69,16 @@ passport.deserializeUser(User.deserializeUser());
 // mongoose.connect("mongodb://localhost:27017/expense-share");
 
 const clusterPassword = process.env.MONGO_DB_CLUSTER_PWD;
-mongoose.connect(
-  `mongodb+srv://meajay64:${clusterPassword}@expenseshare.z2heqoo.mongodb.net/?retryWrites=true&w=majority`
-);
+
+async function connectDb() {
+  await mongoose.connect(
+    "mongodb+srv://meajay64:" +
+      clusterPassword +
+      "@expenseshare.z2heqoo.mongodb.net/?retryWrites=true&w=majority"
+  );
+}
+
+connectDb().catch((err) => console.log(err));
 
 // Get Routes
 app.get("/", (req, res) => {
