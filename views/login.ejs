@@ -20,31 +20,40 @@ message.error) { %>
 </div>
 <% } %>
 
-<div class="container">
-  <form class="form" action="/login" method="post">
-    <label for="username">Username</label>
-    <input type="text" id="username" placeholder="username" name="username" />
+<form class="form" action="/login" method="post">
+  <div class="mb-3">
+    <label for="username" class="form-label">Username</label>
+    <input
+      type="text"
+      class="form-control"
+      id="username"
+      placeholder="Username"
+      name="username"
+    />
+  </div>
 
+  <div class="mb-3">
     <div class="flex-container">
-      <label for="password">Password</label>
-      <span
-        class="tooltip"
-        data-tooltip="Password (UpperCase, LowerCase, Number/SpecialChar and min 8 Chars)"
-        >?</span>
+      <label for="password" class="form-label"
+        >Password
+        <br />
+        (Password must contain an uppercase, lowercase, number and special
+        characters)</label
+      >
     </div>
     <input
-      class="mt-20"
-      pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
       type="password"
+      class="form-control"
       id="password"
-      placeholder="password"
+      placeholder="Password"
       name="password"
+      pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
     />
+  </div>
 
-    <div class="d-grid gap-2 d-md-block">
-      <button class="btn btn-primary" type="submit">LogIn</button>
-    </div>
-  </form>
-</div>
+  <div class="d-grid gap-2 d-md-block">
+    <button class="btn btn-primary" type="submit">LogIn</button>
+  </div>
+</form>
 
 <%- include('partials/foot') %>
