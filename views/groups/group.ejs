@@ -92,26 +92,27 @@
     <fieldset>
       <legend>Add Transaction</legend>
       <label for="member">Member Name</label>
-      <select id="member" name="member">
+      <select class="form-select mb-3" id="member" name="member" aria-label="Select a member">
         <option value="">Please choose a member</option>
         <% (groupObj.member).forEach(person => {%>
         <option value="<%= person %>"><%= person %></option>
         <% }) %>
       </select>
-      <label
-        >Item
-        <input type="text" placeholder="Expense item" name="item" />
-      </label>
 
-      <label
-        >Price
-        <input type="number" placeholder="price" name="price" />
-      </label>
+      <div class="mb-3">
+        <label for="item" class="form-label">Item</label>
+        <input type="text" class="form-control" id="item" name="item" placeholder="Expense Item">
+      </div>
 
-      <label
-        >Date
-        <input type="date" name="date" />
-      </label>
+      <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input type="number" class="form-control" id="price" name="price" placeholder="0">
+      </div>
+
+      <div class="mb-3">
+        <label for="date" class="form-label">Date</label>
+        <input type="date" class="form-control" id="date" name="date">
+      </div>
 
       <input type="hidden" name="groupId" value="<%= groupObj._id %>" <br />
 

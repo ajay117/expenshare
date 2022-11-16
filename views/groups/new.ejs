@@ -1,13 +1,17 @@
 <%- include('../partials/head') %>
 
 <form class="form" action="/groups" method="post">
-  <label for="group_name">Group Name</label>
-  <input
-    id="group_name"
-    type="text"
-    placeholder="Group name"
-    name="group_name"
-  />
+  <div class="mb-3">
+    <label for="group_name" class="form-label">Group Name</label>
+    <input
+      id="group_name"
+      type="text"
+      class="form-control"
+      placeholder="Group name"
+      name="group_name"
+    />
+  </div>
+
   <div>
     <div class="d-grid gap-2">
       <button class="add_member btn btn-secondary" type="button">
@@ -29,9 +33,11 @@
     input.name = `member${count}`;
     input.id = `member${count}`;
     input.placeholder = "Member name";
+    input.classList.add("form-control");
 
     label.htmlFor = `member${count}`;
     label.textContent = `Member ${count}`;
+    label.classList.add("form-label");
 
     parent.insertBefore(input, addMemberBtn);
     parent.insertBefore(label, input);
