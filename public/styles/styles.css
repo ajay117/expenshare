@@ -18,23 +18,13 @@ body {
   min-height: 100%;
 }
 
-label,
-input {
-  display: block;
-  margin-bottom: 10px;
-}
 
 label {
   margin-bottom: 10px;
 }
 
-input {
-  padding: 5px 20px;
-  width: 100%;
-  max-width: 300px;
-}
 
-table,
+/* table,
 th,
 td {
   border: 1px solid black;
@@ -43,7 +33,7 @@ td {
 
 table {
   width: 100%;
-}
+} */
 
 /* || Classes */
 
@@ -107,10 +97,11 @@ button {
   text-decoration: underline;
 }
 
-.form {
-  width: 300px;
+/* .form {
+  width: 100%;
+  width: 600px;
   margin: 0 auto;
-}
+} */
 
 .md-btn {
   padding: 5px 20px;
@@ -215,7 +206,7 @@ x
 
 
 /* ||Utilities */
-.mr-10 {  
+.mr-10 {
   margin-right: 10px;
 }
 
