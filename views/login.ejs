@@ -1,24 +1,23 @@
-<%- include('partials/head') %>
+<%- include('partials/head') %> <% if(Object.keys(message).length > 0 &&
+message.error) { %>
+<div class="alert-error">
+  <p><%= message.error[0] %></p>
 
-<% if(Object.keys(message).length > 0 && message.error) { %>
-  <div class="alert-error">
-    <p><%= message.error[0] %></p>
-
-    <p>
-      <svg
-        class="close-icon"
-        fill="white"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        width="24px"
-        height="24px"
-      >
-        <path
-          d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z"
-        />
-      </svg>
-    </p>
-  </div>
+  <p>
+    <svg
+      class="close-icon"
+      fill="white"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width="24px"
+      height="24px"
+    >
+      <path
+        d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z"
+      />
+    </svg>
+  </p>
+</div>
 <% } %>
 
 <div class="container">
@@ -31,8 +30,7 @@
       <span
         class="tooltip"
         data-tooltip="Password (UpperCase, LowerCase, Number/SpecialChar and min 8 Chars)"
-        >?</span
-      >
+        >?</span>
     </div>
     <input
       class="mt-20"
@@ -43,10 +41,10 @@
       name="password"
     />
 
-    <button class="md-btn" type="submit">LogIn</button>
+    <div class="d-grid gap-2 d-md-block">
+      <button class="btn btn-primary" type="submit">LogIn</button>
+    </div>
   </form>
 </div>
-
-
 
 <%- include('partials/foot') %>

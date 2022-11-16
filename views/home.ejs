@@ -1,6 +1,7 @@
 <%- include('partials/head') %> 
 
-<% if(Object.keys(message).length > 0 && message.success) { %>
+<section class="container">
+  <% if(Object.keys(message).length > 0 && message.success) { %>
     <div class="alert-success">
       <p><%= message.success[0] %></p>
       <p>
@@ -30,12 +31,16 @@
   </ul>
 
   <div class="flex-container">
-    <a class="btn" href="/groups">See all groups</a>
+    <a class="btn btn-dark btn-lg me-4" href="/groups">See all groups</a>
+    <!-- <a class="btn" href="/groups">See all groups</a> -->
     <% if(user) { %>
-    <a class="btn" href="/admin/<%= user._id %>">Go to Dashboard</a>
+    <a class="btn btn-dark btn-lg" href="/admin/<%= user._id %>">Go to Dashboard</a>
     <% } %>
   </div>
 </div>
+</section>
+
+
 
 <script>
   // let closeIcon = document.querySelector(".close-icon");
