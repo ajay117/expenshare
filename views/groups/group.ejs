@@ -28,7 +28,7 @@
 <li><%= groupObj[key] %></li>
 <% } } %> -->
 
-  <table>
+  <table class="table table-light table-bordered">
     <thead>
       <tr>
         <th>Name</th>
@@ -54,12 +54,14 @@
 
   <p>Total individual expenditure</p>
 
-  <table>
-    <tr>
-      <td>Name</td>
-      <td>Total</td>
-      <td>Result</td>
-    </tr>
+  <table class="table table-light table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Total</th>
+        <th>Result</th>
+      </tr>
+    </thead>
     <% for(let key in individualTotalExp) { %>
     <tr>
       <td><%= key %></td>
@@ -71,7 +73,7 @@
     </tr>
     <% } %>
     <tr>
-      <td>Total</td>
+      <td colspan="2">Total</td>
       <td><%= total %></td>
     </tr>
   </table>
@@ -83,12 +85,9 @@
   </form> -->
 
 
-  <br />
-  <br />
-  <br />
 
   <% if(admin) { %>
-  <form class="form" action="/groups/transaction" method="post">
+  <form class="form mt-2" action="/groups/transaction" method="post">
     <fieldset>
       <legend>Add Transaction</legend>
       <label for="member">Member Name</label>
