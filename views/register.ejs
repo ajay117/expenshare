@@ -19,26 +19,35 @@
 <% } %>
 
 <form class="form" action="/register" method="post">
-  <label for="username">Username</label>
-  <input type="text" id="username" placeholder="username" name="username" />
-
-  <div class="flex-container">
-    <label for="password">Password</label>
-    <span
-      class="tooltip"
-      data-tooltip="Password (UpperCase, LowerCase, Number/SpecialChar and min 8 Chars)"
-      >?</span
-    >
+  <div class="mb-3">
+    <label for="username" class="form-label">Username</label>
+    <input
+      type="text"
+      class="form-control"
+      id="username"
+      placeholder="Username"
+      name="username"
+    />
   </div>
-  <input
-    class="mt-20"
-    pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
-    type="password"
-    id="password"
-    placeholder="password"
-    name="password"
-  />
 
+  <div class="mb-3">
+    <div class="flex-container">
+      <label for="password" class="form-label"
+        >Password
+        <br />
+        (Password must contain an uppercase, lowercase, number and special
+        characters)</label
+      >
+    </div>
+    <input
+      type="password"
+      class="form-control"
+      id="password"
+      placeholder="Password"
+      name="password"
+      pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+    />
+  </div>
   <div class="d-grid gap-2 d-md-block">
     <button class="btn btn-secondary" type="submit">Register</button>
   </div>
