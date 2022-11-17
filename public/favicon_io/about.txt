@@ -1,0 +1,6 @@
+This favicon was generated using the following font:
+
+- Font Title: Island Moments
+- Font Author: Copyright 2013-2021 The Island Moments Project Authors (https://github.com/googlefonts/island-moments)
+- Font Source: http://fonts.gstatic.com/s/islandmoments/v3/NaPBcZfVGvBdxIt7Ar0qzkXJF-TGIohbZ6SY.ttf
+- Font License: SIL Open Font License, 1.1 (http://scripts.sil.org/OFL))
