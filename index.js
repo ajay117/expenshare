@@ -66,19 +66,19 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// mongoose.connect("mongodb://localhost:27017/expense-share");
+mongoose.connect("mongodb://localhost:27017/expense-share");
 
-const clusterPassword = process.env.MONGO_DB_CLUSTER_PWD;
+// const clusterPassword = process.env.MONGO_DB_CLUSTER_PWD;
 
-async function connectDb() {
-  await mongoose.connect(
-    "mongodb+srv://meajay64:" +
-      clusterPassword +
-      "@expenseshare.z2heqoo.mongodb.net/expense-share?retryWrites=true&w=majority"
-  );
-}
+// async function connectDb() {
+//   await mongoose.connect(
+//     "mongodb+srv://meajay64:" +
+//       clusterPassword +
+//       "@expenseshare.z2heqoo.mongodb.net/expense-share?retryWrites=true&w=majority"
+//   );
+// }
 
-connectDb().catch((err) => console.log(err));
+// connectDb().catch((err) => console.log(err));
 
 // Get Routes
 app.get("/", (req, res) => {
@@ -93,9 +93,11 @@ app.get("/login", (req, res) => {
   res.render("login", { user: req.user });
 });
 
-app.get("/admin/:id", (req, res) => {
+app.get("/admin/:id", async (req, res) => {
   if (req.user) {
-    res.render("admin", { user: req.user });
+    const userGroup = await Group.find({ admin: req.user });
+
+    res.render("admin", { user: req.user, userGroup: userGroup });
   } else {
     console.log("Please Log in");
   }
@@ -246,6 +248,10 @@ app.post("/logout", (req, res) => {
   });
 });
 
+// app.post("/group/:id/edit")
+
 app.listen(process.env.PORT || 3000, () => {
   console.log("Server is listening on port 3000");
 });
+
+// 63ae797d88f29ba7a632ba97

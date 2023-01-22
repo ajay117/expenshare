@@ -1,7 +1,26 @@
 <%- include('partials/head') %>
 
-<p><a class="btn btn-outline-primary" href="/groups/new">Create Group</a></p>
-
 <!-- <p><a href="/nameOfgroup/addMembers">Add Members</a></p> -->
+
+<% if(userGroup.length < 1) { %>
+    <h c2>You do not have any group. Please create one.
+<% } %>
+
+<% if(userGroup.length >= 1) { %>
+    <h2>Your Groups:-</h2>
+
+<ul>
+  <% userGroup.forEach(group => { %>
+  <li><a href="/groups/<%= group._id %>"><%= group.groupName %></a></li>
+  <% }) %>
+</ul>
+
+<% } %>
+
+<p>
+  <a class="btn btn-outline-primary" href="/groups/new">Create New Group</a>
+</p>
+
+%>
 
 <%- include('partials/foot') %>
