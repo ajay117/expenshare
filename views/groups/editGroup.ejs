@@ -1,0 +1,64 @@
+<%- include('../partials/head') %> <% if(admin) { %>
+<form
+  class="form mt-2"
+  action="/groups/<%= groupObj._id %>/<%= index %>?_method=PUT"
+  method="post"
+>
+  <fieldset>
+    <legend>Add Transaction</legend>
+    <label for="member">Member Name</label>
+    <select
+      class="form-select mb-3"
+      id="member"
+      name="member"
+      aria-label="Select a member"
+    >
+      <option value="">Please choose a member</option>
+      <% (groupObj.member).forEach(person => {%>
+      <option
+        value="<%= person %>"
+        <%= (groupObj.transaction[index].member.toLowerCase() === person.toLowerCase()) ? "selected" : ""%>
+      >
+        <%= person %>
+      </option>
+      <% }) %>
+    </select>
+
+    <div class="mb-3">
+      <label for="item" class="form-label">Item</label>
+      <input
+        type="text"
+        class="form-control"
+        id="item"
+        name="item"
+        placeholder="Expense Item"
+        value="<%= groupObj.transaction[index].item %>"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="price" class="form-label">Price</label>
+      <input
+        type="number"
+        class="form-control"
+        id="price"
+        name="price"
+        placeholder="0"
+        value="<%= groupObj.transaction[index].price %>"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="date" class="form-label">Date</label>
+      <input type="date" class="form-control" id="date" name="date" value="<%= groupObj.transaction[index].date %>"/>
+    </div>
+
+    <input type="hidden" name="groupId" value="<%= groupObj._id %>" <br />
+
+    <div class="d-grid gap-2">
+      <button class="btn btn-primary" type="submit">Update Transaction</button>
+    </div>
+  </fieldset>
+</form>
+
+<% } %> <%- include('../partials/foot') %>

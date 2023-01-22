@@ -35,15 +35,17 @@
         <th>Date</th>
         <th>Item</th>
         <th>Price</th>
+        <th></th>
       </tr>
     </thead>
 
-    <%(groupObj.transaction).forEach(obj => { %>
+    <%(groupObj.transaction).forEach((obj, index) => { %>
     <tr>
       <td><%= obj.member %></td>
       <td><%= obj.date %></td>
       <td><%= obj.item %></td>
       <td><%= obj.price %></td>
+      <td><a href="/groups/<%= groupObj._id %>/<%= index %>/edit">Edit</a></td>
     </tr>
     <%}) %>
     <tr>
@@ -123,11 +125,11 @@
     </fieldset>
   </form>
 
+
+
   <% } %>
 
-  <br />
-
-  <script></script>
+  
 
   <%- include('../partials/foot') %>
 </div>
