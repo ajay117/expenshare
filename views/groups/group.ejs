@@ -35,7 +35,9 @@
         <th>Date</th>
         <th>Item</th>
         <th>Price</th>
+        <% if(admin)  {%>
         <th></th>
+        <% } %>
       </tr>
     </thead>
 
@@ -45,7 +47,14 @@
       <td><%= obj.date %></td>
       <td><%= obj.item %></td>
       <td><%= obj.price %></td>
-      <td><a href="/groups/<%= groupObj._id %>/<%= index %>/edit">Edit</a></td>
+      
+      <% if(admin) {%>
+      <td><a style="margin-right: 30px;" href="/groups/<%= groupObj._id %>/<%= index %>/edit">Edit</a> 
+        <form action="/groups/<%= groupObj._id %>/<%= index %>?_method=DELETE" method="post">
+          <button>Delete</button>
+        </form>
+      </td>
+      <% } %>
     </tr>
     <%}) %>
     <tr>

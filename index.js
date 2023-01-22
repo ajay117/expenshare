@@ -293,6 +293,23 @@ app.put("/groups/:groupId/:index", async (req, res) => {
   // await group.save();
 });
 
+app.delete("/groups/:groupId/:index", async (req, res) => {
+  let { groupId, index } = req.params;
+  const objectId = mongoose.Types.ObjectId(groupId);
+  index = parseInt(index);
+
+  let group = await Group.findById({ _id: objectId });
+  let { member, item, price, date } = group.transaction[index];
+
+  let field = `transaction.${index}`;
+  let fieldValue = `transaction.${index}`;
+
+  await Group.updateOne({ _id: objectId }, { $unset: { [field]: 1 } });
+  await Group.updateOne({ _id: objectId }, { $pull: { transaction: null } });
+
+  res.redirect("/groups/" + groupId);
+});
+
 app.listen(process.env.PORT || 3000, () => {
   console.log("Server is listening on port 3000");
 });
