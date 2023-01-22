@@ -9,6 +9,7 @@ const session = require("express-session");
 const passportLocalMongoose = require("passport-local-mongoose");
 const passport = require("passport");
 const flash = require("connect-flash");
+const methodOverride = require("method-override");
 
 app.use(express.static(__dirname + "/public"));
 app.use(
@@ -24,6 +25,7 @@ app.use(
   })
 );
 
+app.use(methodOverride("_method"));
 app.use(flash());
 
 app.set("view engine", "ejs");
@@ -119,7 +121,7 @@ app.get("/groups/new", (req, res) => {
 
 app.get("/groups/:groupId", async (req, res) => {
   const { groupId } = req.params;
-  const groups = await Group.find();
+  // const groups = await Group.find();
   // const groupObj = groups.find(
   //   (obj) => obj.groupName.toLowerCase() === groupName
   // );
@@ -145,11 +147,24 @@ app.get("/groups/:groupId", async (req, res) => {
       }
     }
   });
+  console.log({ groupObj, total, individualTotalExp }, req.user);
   res.render("groups/group", {
     groupObj: groupObj,
     total: total,
     individualTotalExp: individualTotalExp,
     admin: req.user ? req.user._id.equals(groupObj.admin) : false,
+    user: req.user,
+  });
+});
+
+app.get("/groups/:groupId/:index/edit", async (req, res) => {
+  let { groupId, index } = req.params;
+  const groupObj = await Group.findById(groupId);
+
+  res.render("groups/editGroup", {
+    admin: req.user ? req.user._id.equals(groupObj.admin) : false,
+    groupObj: groupObj,
+    index: index,
     user: req.user,
   });
 });
@@ -249,6 +264,34 @@ app.post("/logout", (req, res) => {
 });
 
 // app.post("/group/:id/edit")
+
+app.put("/groups/:groupId/:index", async (req, res) => {
+  let { groupId, index } = req.params;
+  let { member, item, price, date } = req.body;
+  index = parseInt(index);
+  price = parseInt(price);
+  let objectId = mongoose.Types.ObjectId(groupId);
+
+  let fieldOne = `transaction.${index}.member`;
+  let fieldTwo = `transaction.${index}.item`;
+  let fieldThree = `transaction.${index}.price`;
+  let fieldFour = `transaction.${index}.date`;
+  await Group.updateOne(
+    { _id: objectId },
+    {
+      $set: {
+        [fieldOne]: member,
+        [fieldTwo]: item,
+        [fieldThree]: price,
+        [fieldFour]: date,
+      },
+    }
+  );
+
+  req.flash("success", "Transaction successfully updated");
+  res.redirect("/groups/" + groupId);
+  // await group.save();
+});
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("Server is listening on port 3000");
