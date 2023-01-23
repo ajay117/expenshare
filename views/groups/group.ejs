@@ -35,7 +35,7 @@
         <th>Date</th>
         <th>Item</th>
         <th>Price</th>
-        <% if(admin)  {%>
+        <% if(admin && groupObj.transaction.length > 0)  {%>
         <th></th>
         <% } %>
       </tr>
