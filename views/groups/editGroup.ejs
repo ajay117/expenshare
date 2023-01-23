@@ -12,6 +12,7 @@
       id="member"
       name="member"
       aria-label="Select a member"
+      required
     >
       <option value="">Please choose a member</option>
       <% (groupObj.member).forEach(person => {%>
@@ -33,6 +34,7 @@
         name="item"
         placeholder="Expense Item"
         value="<%= groupObj.transaction[index].item %>"
+        required
       />
     </div>
 
@@ -45,12 +47,13 @@
         name="price"
         placeholder="0"
         value="<%= groupObj.transaction[index].price %>"
+        required
       />
     </div>
 
     <div class="mb-3">
       <label for="date" class="form-label">Date</label>
-      <input type="date" class="form-control" id="date" name="date" value="<%= groupObj.transaction[index].date %>"/>
+      <input type="date" class="form-control" id="date" name="date" value="<%= groupObj.transaction[index].date %>" required/>
     </div>
 
     <input type="hidden" name="groupId" value="<%= groupObj._id %>" <br />
