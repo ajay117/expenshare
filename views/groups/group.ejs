@@ -70,7 +70,8 @@
     </tr>
     <%}) %>
     <tr>
-      <td colspan="3">Total</td>
+      <!-- <td colspan="3">Total</td> -->
+      <td colspan="<%= (admin && groupObj.transaction.length > 0) ? 4 : 3 %>">Total</td>
       <td><%= total %></td>
     </tr>
   </table>
@@ -128,7 +129,7 @@
 
       <div class="mb-3">
         <label for="price" class="form-label">Price</label>
-        <input type="number" class="form-control" id="price" name="price" placeholder="0" required>
+        <input type="number" class="form-control" id="price" name="price" placeholder="0" min="0" required>
       </div>
 
       <div class="mb-3">
