@@ -29,17 +29,18 @@ message.error) { %>
       id="username"
       placeholder="Username"
       name="username"
+      required
     />
   </div>
 
   <div class="mb-3">
     <div class="flex-container">
-      <label for="password" class="form-label"
-        >Password
+      <label for="password" class="form-label">
+        Password
         <br />
         (Password must contain an uppercase & lowercase letter, a number and
-        special characters)</label>
-      >
+        special characters)
+      </label>
     </div>
     <input
       type="password"
@@ -48,6 +49,7 @@ message.error) { %>
       placeholder="Password"
       name="password"
       pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+      required
     />
   </div>
 

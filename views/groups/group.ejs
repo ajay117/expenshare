@@ -102,7 +102,7 @@
     <fieldset>
       <legend>Add Transaction</legend>
       <label for="member">Member Name</label>
-      <select class="form-select mb-3" id="member" name="member" aria-label="Select a member">
+      <select class="form-select mb-3" id="member" name="member" aria-label="Select a member" required>
         <option value="">Please choose a member</option>
         <% (groupObj.member).forEach(person => {%>
         <option value="<%= person %>"><%= person %></option>
@@ -111,12 +111,12 @@
 
       <div class="mb-3">
         <label for="item" class="form-label">Item</label>
-        <input type="text" class="form-control" id="item" name="item" placeholder="Expense Item">
+        <input type="text" class="form-control" id="item" name="item" placeholder="Expense Item" required>
       </div>
 
       <div class="mb-3">
         <label for="price" class="form-label">Price</label>
-        <input type="number" class="form-control" id="price" name="price" placeholder="0">
+        <input type="number" class="form-control" id="price" name="price" placeholder="0" required>
       </div>
 
       <div class="mb-3">
