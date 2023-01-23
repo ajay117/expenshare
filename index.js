@@ -147,7 +147,7 @@ app.get("/groups/:groupId", async (req, res) => {
       }
     }
   });
-  console.log({ groupObj, total, individualTotalExp }, req.user);
+
   res.render("groups/group", {
     groupObj: groupObj,
     total: total,
@@ -308,6 +308,14 @@ app.delete("/groups/:groupId/:index", async (req, res) => {
   await Group.updateOne({ _id: objectId }, { $pull: { transaction: null } });
 
   res.redirect("/groups/" + groupId);
+});
+
+app.delete("/admin/:adminId/groups/:groupId", async (req, res) => {
+  const { groupId, adminId } = req.params;
+  const objectId = mongoose.Types.ObjectId(groupId);
+  await Group.deleteOne({ _id: objectId });
+
+  res.redirect("/admin/" + adminId);
 });
 
 app.listen(process.env.PORT || 3000, () => {
