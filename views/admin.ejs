@@ -10,9 +10,20 @@
 
   <ul>
     <% userGroup.forEach(group => { %>
-    <li><a href="/groups/<%= group._id %>"><%= group.groupName %></a></li>
+    <li>
+      <a href="/groups/<%= group._id %>"><%= group.groupName %></a>
+      <form
+        action="/admin/<%= group.admin %>/groups/<%= group._id %>?_method=DELETE"
+        method="post"
+      >
+        <button>Delete</button>
+      </form>
+    </li>
     <% }) %>
   </ul>
+
+  
+  
 
   <% } %>
 
