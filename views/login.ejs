@@ -1,61 +1,110 @@
-<%- include('partials/head') %> <% if(Object.keys(message).length > 0 &&
-message.error) { %>
-<div class="alert-error">
-  <p><%= message.error[0] %></p>
+<%- include('partials/head') %>
 
-  <p>
-    <svg
-      class="close-icon"
-      fill="white"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      width="24px"
-      height="24px"
-    >
-      <path
-        d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z"
+<div class="container">
+  <% if(Object.keys(message).length > 0 && message.error) { %>
+  <div class="alert-error">
+    <p><%= message.error[0] %></p>
+
+    <p>
+      <svg
+        class="close-icon"
+        fill="white"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="24px"
+        height="24px"
+      >
+        <path
+          d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z"
+        />
+      </svg>
+    </p>
+  </div>
+  <% } %>
+
+  <form class="form" action="/login" method="post">
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        placeholder="Username"
+        name="username"
+        required
       />
-    </svg>
-  </p>
-</div>
-<% } %>
-
-<form class="form" action="/login" method="post">
-  <div class="mb-3">
-    <label for="username" class="form-label">Username</label>
-    <input
-      type="text"
-      class="form-control"
-      id="username"
-      placeholder="Username"
-      name="username"
-      required
-    />
-  </div>
-
-  <div class="mb-3">
-    <div class="flex-container">
-      <label for="password" class="form-label">
-        Password
-        <br />
-        (Password must contain an uppercase & lowercase letter, a number and
-        special characters)
-      </label>
     </div>
-    <input
-      type="password"
-      class="form-control"
-      id="password"
-      placeholder="Password"
-      name="password"
-      pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
-      required
-    />
-  </div>
 
-  <div class="d-grid gap-2 d-md-block">
-    <button class="btn btn-primary" type="submit">LogIn</button>
-  </div>
-</form>
+    <div class="mb-3">
+      <div class="flex-container">
+        <label for="password" class="form-label">
+          Password
+          <svg
+            class="icon-info"
+            width="20px"
+            height="20px"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
+              stroke="#292D32"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M12 8V13"
+              stroke="#292D32"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M11.9945 16H12.0035"
+              stroke="#292D32"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <br />
+        </label>
+      </div>
+      <div class="hide alert alert-dark text-sm text-bold">
+        Password must contain an uppercase(e.g: A,B,C...) & lowercase(e.g:
+        a,b,c...) letter, a number(e.g:-1,2,3...) and special characters(e.g:-
+        @,$,&...).
+      </div>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        placeholder="Password"
+        name="password"
+        pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+        required
+      />
+    </div>
+
+    <div class="d-grid gap-2 d-md-block">
+      <button class="btn btn-primary" type="submit">LogIn</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  let infoIcon = document.querySelector(".icon-info");
+  infoIcon.addEventListener("mouseenter", () => {
+    let alertBox = document.querySelector(".alert");
+    alertBox.classList.remove("hide");
+  });
+
+  infoIcon.addEventListener("mouseleave", () => {
+    let alertBox = document.querySelector(".alert");
+    alertBox.classList.add("hide");
+  });
+</script>
 
 <%- include('partials/foot') %>
