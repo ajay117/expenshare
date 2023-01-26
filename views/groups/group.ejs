@@ -24,7 +24,7 @@
     </p>
   </div> -->
 
-  <h1 class="heading-text"><%= groupObj.groupName %></h1>
+  <h1 class="mb-4"><%= groupObj.groupName %></h1>
 
   <!-- <% for(let key in groupObj) { if(key !== 'transaction') {%>
 <li><%= groupObj[key] %></li>
@@ -76,7 +76,7 @@
     </tr>
   </table>
 
-  <p class="text-secondary mt-4">Total individual expenditure</p>
+  <p class="text-secondary mt-4"><u>Total individual expenditure</u></p>
 
   <table class="table table-light table-bordered">
     <thead>
@@ -108,12 +108,12 @@
     <button class="btn pv-10 ph-20"> Clear All</button>
   </form> -->
 
-
+<hr>
 
   <% if(admin) { %>
   <form class="form mt-2" action="/groups/transaction" method="post">
     <fieldset>
-      <legend>Add Transaction</legend>
+      <legend class="mb-4">Add Transaction</legend>
       <label for="member">Member Name</label>
       <select class="form-select mb-3" id="member" name="member" aria-label="Select a member" required>
         <option value="">Please choose a member</option>

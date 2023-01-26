@@ -197,3 +197,7 @@ button {
 .text-bold {
   font-weight: 600;
 }
+
+hr {
+  border-width: 2px;
+}
