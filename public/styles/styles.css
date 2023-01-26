@@ -23,6 +23,13 @@ label {
   font-weight: 600;
 }
 
+footer {
+  color: #afafaf;
+  position: relative;
+  top: 10px;
+  font-size: 12px;
+}
+
 /* table,
 th,
 td {
