@@ -1,5 +1,9 @@
 <%- include('../partials/head') %>
 
+<% if(admin) { %>
+  <p class="mb-4 "><a class="btn btn-dark text-white" href="/admin/<%= groupObj.admin %>">&#8592; Go to Dashboard</a></p>
+<% } %>
+
 <div class="container">
 
 <!-- <% if(message.success) { %>
@@ -71,7 +75,8 @@
     <%}) %>
     <tr>
       <!-- <td colspan="3">Total</td> -->
-      <td class="bg-dark text-white" colspan="<%= (admin && groupObj.transaction.length > 0) ? 3 : 2 %>">Total</td>
+      <!-- <td class="bg-dark text-white" colspan="<%= (admin && groupObj.transaction.length > 0) ? 3 : 2 %>">Total</td> -->
+      <td class="bg-dark text-white" colspan="3">Total</td>
       <td class="bg-dark text-white"><%= total %></td>
     </tr>
   </table>
@@ -141,7 +146,7 @@
 
 
       <div class="d-grid gap-2">
-        <button class="btn btn-primary" type="submit">Add Transaction</button>
+        <button class="btn btn-primary btn-submit" type="submit">Add Transaction</button>
       </div>
 
     </fieldset>
@@ -153,5 +158,13 @@
 
 </div>
 
+<script>
+  let btnSubmit =  document.querySelector('.btn-submit');
+  btnSubmit.addEventListener('click', (e) => {
+    btnSubmit.classList.add('hide');
+
+  })
+
+</script>
   <%- include('../partials/foot') %>
 </div>

@@ -2,8 +2,8 @@
 
 <div class="container">
   <% if(Object.keys(message).length > 0 && message.error) { %>
-  <div class="alert-error">
-    <p><%= message.error[0] %></p>
+  <div>
+    <p class="alert alert-danger"><%= message.error[0] %></p>
 
     <p>
       <svg
