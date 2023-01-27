@@ -12,16 +12,27 @@ html {
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 18px;
+  font-size: 10px;
   margin: 0;
   padding: 20px;
   min-height: 100%;
   position: relative;
 }
 
+p {
+  font-size: 1.6rem;
+}
+li {
+  font-size: 1.2rem;
+}
+table {
+  font-size: 1.2rem;
+}
+
 label {
   margin-bottom: 10px;
   font-weight: 600;
+  font-size: 1.2rem;
 }
 
 footer {
@@ -30,7 +41,7 @@ footer {
   bottom: 0;
   left: 0;
   right: 0;
-  font-size: 12px;
+  font-size: 1.2rem;
   text-align: center;
 }
 
@@ -50,7 +61,6 @@ table {
 button {
   margin-top: 10px;
   margin-bottom: 10px;
-  font-size: 18px;
 }
 
 .nav {
@@ -115,7 +125,7 @@ button {
 
 .md-btn {
   padding: 5px 20px;
-  font-size: 18px;
+  font-size: 1.125rem;
   margin-top: 20px;
   width: 100%;
   max-width: 300px;
@@ -139,9 +149,13 @@ button {
 .btn-logout {
   border: 1px solid black;
   background-color: transparent;
-  font-size: 17px;
+  font-size: 1.06rem;
   padding: 5px 25px;
   border-radius: 15px;
+}
+
+.alert {
+  font-size: 1.2rem;
 }
 
 .alert-success,
@@ -187,6 +201,10 @@ button {
   margin-bottom: 50px;
 }
 
+.ml-3 {
+  margin-left: 3px;
+}
+
 .mr-auto {
   margin: 0 auto;
 }
@@ -202,7 +220,7 @@ button {
 }
 
 .text-sm {
-  font-size: 12px;
+  font-size: 1.2rem;
 }
 
 .text-bold {
@@ -211,4 +229,8 @@ button {
 
 hr {
   border-width: 2px;
+}
+
+.underline {
+  text-decoration: underline;
 }
