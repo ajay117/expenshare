@@ -218,7 +218,9 @@ button {
   padding-left: 20px;
   padding-right: 20px;
 }
-
+.text-xsm {
+  font-size: 0.8rem;
+}
 .text-sm {
   font-size: 1.2rem;
 }
