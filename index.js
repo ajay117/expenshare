@@ -114,22 +114,14 @@ app.get("/groups/new", (req, res) => {
   if (req.user) {
     res.render("groups/new", { user: req.user });
   } else {
-    console.log("Please log in");
     res.redirect("/login");
   }
 });
 
 app.get("/groups/:groupId", async (req, res) => {
   const { groupId } = req.params;
-  // const groups = await Group.find();
-  // const groupObj = groups.find(
-  //   (obj) => obj.groupName.toLowerCase() === groupName
-  // );
-
   const groupObj = await Group.findById(groupId);
-
   let total = 0;
-
   groupObj.transaction.forEach((obj) => {
     total += obj.price;
   });
@@ -210,13 +202,8 @@ app.post("/groups", (req, res) => {
     }
   });
 
-  // groups.push(group);
   res.redirect("/groups");
 });
-
-// app.post('/groups/:id', (req,res) => {
-
-// })
 
 app.post("/register", (req, res) => {
   User.register(
@@ -302,7 +289,6 @@ app.put("/groups/:groupId/:index", async (req, res) => {
 
   req.flash("success", "Transaction successfully updated");
   res.redirect("/groups/" + groupId);
-  // await group.save();
 });
 
 app.delete("/groups/:groupId/:index", async (req, res) => {
@@ -334,18 +320,12 @@ app.put("/admin/:adminId/groups/:groupId/update", async (req, res) => {
   let { groupId, adminId } = req.params;
 
   const { group_name, new_member } = req.body;
-  console.log(new_member);
   groupId = mongoose.Types.ObjectId(groupId);
   let group = await Group.findById({ _id: groupId });
 
   if (new_member) {
     let oldMember = group.member;
     group.member = [...oldMember, new_member];
-    // await Group.updateOne(
-    //   { _id: groupId },
-    //   { groupName: group_name },
-    //   { $push: { member: new_member } }
-    // );
   }
   if (group.groupName !== group_name) {
     group.groupName = group_name;
@@ -371,5 +351,3 @@ app.delete(
 app.listen(process.env.PORT || 3000, () => {
   console.log("Server is listening on port 3000");
 });
-
-// 63ae797d88f29ba7a632ba97
