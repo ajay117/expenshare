@@ -101,7 +101,7 @@ app.get("/admin/:id", async (req, res) => {
 
     res.render("admin", { user: req.user, userGroup: userGroup });
   } else {
-    console.log("Please Log in");
+    res.redirect("/login");
   }
 });
 
@@ -163,8 +163,20 @@ app.get("/groups/:groupId/:index/edit", async (req, res) => {
 
   res.render("groups/editGroup", {
     admin: req.user ? req.user._id.equals(groupObj.admin) : false,
+    user: req.user,
     groupObj: groupObj,
     index: index,
+  });
+});
+
+app.get("/admin/:adminId/groups/:groupId/edit", async (req, res) => {
+  const { adminId, groupId } = req.params;
+  const groupObj = await Group.findById(groupId);
+  res.render("groups/editGroupInfo", {
+    adminId: adminId,
+    groupId: groupId,
+    groupObj: groupObj,
+    admin: req.user ? req.user._id.equals(groupObj.admin) : false,
     user: req.user,
   });
 });
@@ -247,8 +259,8 @@ app.post(
   "/login",
   passport.authenticate("local", {
     successRedirect: "/",
-    failureRedirect: "/login",
     successFlash: { type: "success", message: "Welcome" },
+    failureRedirect: "/login",
     failureFlash: { type: "error", message: "Invalid username or password." },
   })
 );
@@ -317,6 +329,44 @@ app.delete("/admin/:adminId/groups/:groupId", async (req, res) => {
 
   res.redirect("/admin/" + adminId);
 });
+
+app.put("/admin/:adminId/groups/:groupId/update", async (req, res) => {
+  let { groupId, adminId } = req.params;
+
+  const { group_name, new_member } = req.body;
+  console.log(new_member);
+  groupId = mongoose.Types.ObjectId(groupId);
+  let group = await Group.findById({ _id: groupId });
+
+  if (new_member) {
+    let oldMember = group.member;
+    group.member = [...oldMember, new_member];
+    // await Group.updateOne(
+    //   { _id: groupId },
+    //   { groupName: group_name },
+    //   { $push: { member: new_member } }
+    // );
+  }
+  if (group.groupName !== group_name) {
+    group.groupName = group_name;
+  }
+  await group.save();
+  res.redirect("/admin/" + adminId);
+});
+
+app.delete(
+  "/admin/:adminId/groups/:groupId/member/:index/delete",
+  async (req, res) => {
+    let { groupId, index, adminId } = req.params;
+    groupId = mongoose.Types.ObjectId(groupId);
+    let group = await Group.findById({ _id: groupId });
+
+    group.member.splice(index, 1);
+    await group.save();
+
+    res.redirect("/admin/" + adminId);
+  }
+);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("Server is listening on port 3000");
