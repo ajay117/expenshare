@@ -1,6 +1,8 @@
-<%- include('../partials/head') %> <% if(admin) { %>
-    
+<%- include('../partials/head') %> 
+
 <div class="container">
+  <% if(admin) { %>
+    
     <p class="mb-4"><a class="btn btn-dark text-white" href="/admin/<%= groupObj.admin %>">&#8592; Back</a></p>
   <form id="form-group-name"
     class="form mt-2"
@@ -69,7 +71,6 @@
       <button class="btn btn-primary" type="submit">Update</button>
     </div>
   </form>
-</div>
 
 <script>
   let memberInput = document.querySelector(".member-input");
@@ -81,12 +82,17 @@
   });
 </script>
 
-<% } %> <%- include('../partials/foot') %>
+<% } else {%>
+    <p class="alert alert-info">Sorry, you are not authorized to view this page. Please log in as admin first.</p>
+    <% } %>
+</div>
+
+
+<%- include('../partials/foot') %>
 
 
 
 
 <!-- http://localhost:3000/admin/63ccf91d47d8e923bcc06be5 -->
 
-edit group
 <!-- http://localhost:3000/admin/63ccf91d47d8e923bcc06be5/groups/63ce1bbe632c3d1ba93a9d57/edit -->
