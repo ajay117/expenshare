@@ -42,6 +42,8 @@ app.use(passport.session());
 const groupSchema = new mongoose.Schema({
   groupName: String,
   admin: mongoose.Types.ObjectId,
+  moderatorRequests: [{}],
+  moderator: [String],
   member: [String],
   transaction: [{}],
 });
@@ -173,6 +175,55 @@ app.get("/admin/:adminId/groups/:groupId/edit", async (req, res) => {
   });
 });
 
+app.get("/admin/:adminId/groups/:groupId/change-admin", async (req, res) => {
+
+  let { adminId, groupId } = req.params;
+  groupId = mongoose.Types.ObjectId(groupId);
+  adminId = mongoose.Types.ObjectId(adminId);
+
+  // let user = await User.findById({ _id: adminId });
+  let group = await Group.findById({ _id: groupId });
+
+  if(!req.user._id.equals(group.admin)) {
+    res.redirect('/');
+    return;
+  }
+
+
+  let moderatorsObjectId = group.moderator.map((id) => {
+    return mongoose.Types.ObjectId(id);
+  });
+
+  let moderatorUserNameArr = await User.find({
+    _id: {
+      $in: [...moderatorsObjectId],
+    },
+  });
+
+  res.render("groups/newAdmin", {
+    group: group,
+    // user: user,
+    // username: user.username,
+    moderatorUserNameArr: moderatorUserNameArr,
+    user: req.user,
+    admin: req.user ? req.user._id.equals(group.admin) : false,
+  });
+});
+
+app.put(
+  "/admin/:adminId/groups/:groupId/moderator/:moderatorId/change-admin",
+  async (req, res) => {
+    let { adminId, groupId, moderatorId } = req.params;
+
+    let group = await Group.findById({ _id: mongoose.Types.ObjectId(groupId) });
+    group.admin = mongoose.Types.ObjectId(moderatorId);
+    group.moderator.splice(group.moderator.indexOf(moderatorId), 1);
+
+    await group.save();
+    res.redirect("/");
+  }
+);
+
 //Post Routes
 app.post("/groups", (req, res) => {
   let group = {
@@ -262,7 +313,53 @@ app.post("/logout", (req, res) => {
   });
 });
 
-// app.post("/group/:id/edit")
+app.post("/groups/:groupId/moderator-request/:userId", async (req, res) => {
+  let { groupId, userId } = req.params;
+  const { message } = req.body;
+  console.log({ message, userId });
+  groupId = mongoose.Types.ObjectId(groupId);
+  userId = mongoose.Types.ObjectId(userId);
+
+  let group = await Group.findById({ _id: groupId });
+  let oldRequests = group.moderatorRequests;
+  let newRequest = [{ userId, message }];
+  group.moderatorRequests = [...oldRequests, ...newRequest];
+
+  await group.save();
+  res.redirect("/groups/" + groupId);
+});
+
+app.put(
+  "/admin/:adminId/groups/:groupId/moderator-request/:index/accept",
+  async (req, res) => {
+    let { adminId, groupId, index } = req.params;
+    groupId = mongoose.Types.ObjectId(groupId);
+    let group = await Group.findById({ _id: groupId });
+
+    let oldModeratorData = group.moderator;
+    let newModeratorData = group.moderatorRequests[index].userId;
+
+    group.moderator = [...oldModeratorData, newModeratorData];
+    group.moderatorRequests.splice(index, 1);
+    await group.save();
+
+    res.redirect("/admin/" + adminId);
+  }
+);
+
+app.delete(
+  "/admin/:adminId/groups/:groupId/moderator-request/:index/reject",
+  async (req, res) => {
+    let { adminId, groupId, index } = req.params;
+    groupId = mongoose.Types.ObjectId(groupId);
+    let group = await Group.findById({ _id: groupId });
+
+    group.moderatorRequests.splice(index, 1);
+    await group.save();
+
+    res.redirect("/admin/" + adminId);
+  }
+);
 
 app.put("/groups/:groupId/:index", async (req, res) => {
   let { groupId, index } = req.params;

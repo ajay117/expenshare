@@ -218,6 +218,11 @@ button {
   padding-left: 20px;
   padding-right: 20px;
 }
+
+.p-0 {
+  padding: 0;
+}
+
 .text-xsm {
   font-size: 0.8rem;
 }

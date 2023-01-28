@@ -1,0 +1,25 @@
+<%- include('../partials/head') %>
+
+<div class="container">
+  <% if(admin) { %> 
+  <% group.moderator.forEach((id,index) => { %>
+  <div class="d-flex align-items-center justify-content-between">
+    <p><b>Moderator:</b> <%= moderatorUserNameArr[index].username %></p>
+    <form
+      action="/admin/<%= group.admin %>/groups/<%= group._id %>/moderator/<%= id %>/change-admin?_method=PUT"
+      method="post"
+    >
+      <button class="btn btn-danger">Make Admin</button>
+    </form>
+  </div>
+  <% }) %> <% if(!admin) {%>
+  <p class="alert alert-warning">Page only accessible by admin.</p>
+  <a href="/">Homepage</a>
+  <% } %> <% if(group.moderator.length < 1) {%>
+  <p class="btn btn-info">
+    Sorry, no moderators. Add some moderators first, and then change admin.
+  </p>
+  <% } %> <% } %>
+</div>
+
+<%- include('../partials/foot') %>
