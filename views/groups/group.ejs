@@ -1,7 +1,16 @@
 <%- include('../partials/head') %>
+<%  console.log(user) %>
 
-<% if(admin) { %>
+<% if(admin && user) { %>
   <p class="mb-4 "><a class="btn btn-dark text-white" href="/admin/<%= groupObj.admin %>">&#8592; Go to Dashboard</a></p>
+<% } else if(user && !admin && !groupObj.moderator.includes(user._id)) { %>
+  <button class="text-sm btn btn-primary mb-4 btn-request">Request to be moderator</button>
+  <form class="form-moderator" action="/groups/<%= groupObj._id %>/moderator-request/<%= user._id %>" method="post">
+    <label for="message" class="form-label">Your message...</label>
+    <input type="text" id="message" name="message" minlength="8" maxlength="12" class="form-control" required></textarea>
+    <button class="btn btn-primary">Submit</button>
+  </form>
+  
 <% } %>
 
 <div class="container">
