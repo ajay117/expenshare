@@ -89,6 +89,10 @@ app.get("/", (req, res) => {
   res.render("home", { user: req.user });
 });
 
+app.get("/faq", (req, res) => {
+  res.render("faq", { user: req.user });
+});
+
 app.get("/register", (req, res) => {
   res.render("register", { user: req.user });
 });
@@ -176,7 +180,6 @@ app.get("/admin/:adminId/groups/:groupId/edit", async (req, res) => {
 });
 
 app.get("/admin/:adminId/groups/:groupId/change-admin", async (req, res) => {
-
   let { adminId, groupId } = req.params;
   groupId = mongoose.Types.ObjectId(groupId);
   adminId = mongoose.Types.ObjectId(adminId);
@@ -184,11 +187,10 @@ app.get("/admin/:adminId/groups/:groupId/change-admin", async (req, res) => {
   // let user = await User.findById({ _id: adminId });
   let group = await Group.findById({ _id: groupId });
 
-  if(!req.user._id.equals(group.admin)) {
-    res.redirect('/');
+  if (!req.user._id.equals(group.admin)) {
+    res.redirect("/");
     return;
   }
-
 
   let moderatorsObjectId = group.moderator.map((id) => {
     return mongoose.Types.ObjectId(id);

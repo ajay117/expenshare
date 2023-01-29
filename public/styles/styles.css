@@ -19,9 +19,18 @@ body {
   position: relative;
 }
 
+#faq:hover {
+  font-size: 1.3rem;
+}
+
+/* #faq:active {
+  font-size: 1.4rem;
+} */
+
 p {
   font-size: 1.6rem;
 }
+
 li {
   font-size: 1.2rem;
 }
@@ -41,8 +50,25 @@ footer {
   bottom: 0;
   left: 0;
   right: 0;
-  font-size: 1.2rem;
+  font-size: 1rem;
   text-align: center;
+}
+
+details {
+  font-size: 1.4rem;
+  border-bottom: 0.3px solid black;
+  margin-bottom: 0.5rem;
+}
+summary {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+details p {
+  font-size: 1.1rem;
+}
+
+details li:last-child {
+  margin-bottom: 0.5rem;
 }
 
 /* table,
@@ -205,6 +231,18 @@ button {
   margin-left: 3px;
 }
 
+.mr-5 {
+  margin-right: 5px;
+}
+
+.ml-10 {
+  margin-left: 10px;
+}
+
+.middle {
+  vertical-align: middle;
+}
+
 .mr-auto {
   margin: 0 auto;
 }
@@ -230,6 +268,10 @@ button {
   font-size: 1.2rem;
 }
 
+.text-md {
+  font-size: 1.4rem;
+}
+
 .text-bold {
   font-weight: 600;
 }
@@ -240,4 +282,12 @@ hr {
 
 .underline {
   text-decoration: underline;
+}
+
+.no-list {
+  list-style-type: none;
+}
+
+.numbered-list {
+  list-style-type:;
 }

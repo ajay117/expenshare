@@ -1,43 +1,45 @@
 <%- include('../partials/head') %>
-<% if(admin && user) { %>
-<p class="mb-4">
-  <a class="btn btn-dark text-white" href="/admin/<%= groupObj.admin %>"
-    >&#8592; Go to Dashboard</a>
-</p>
-<% } else if(user && !admin && !groupObj.moderator.includes(user._id)) { %>
-<button class="text-sm btn btn-primary mb-4 btn-request">
-  Request to be moderator
-</button>
-<form
-  class="form-moderator hide mb-4"
-  action="/groups/<%= groupObj._id %>/moderator-request/<%= user._id %>"
-  method="post"
->
-  <label for="message" class="form-label">Secret key...</label>
-  <input
-    type="text"
-    id="message"
-    name="message"
-    minlength="8"
-    maxlength="12"
-    class="form-control"
-    required
-  />
-  <button class="btn btn-primary">Submit</button>
-</form>
-
-<script>
-  let requestbtn = document.querySelector(".btn-request");
-  requestbtn.addEventListener("click", () => {
-    let moderatorForm = document.querySelector(".form-moderator");
-    moderatorForm.classList.remove("hide");
-    requestbtn.disabled = "true";
-  });
-</script>
-
-<% } %>
 
 <div class="container">
+  <% if(admin && user) { %>
+  <p class="mb-4">
+    <a class="btn btn-dark text-white" href="/admin/<%= groupObj.admin %>"
+      >&#8592; Go to Dashboard</a
+    >
+  </p>
+  <% } else if(user && !admin && !groupObj.moderator.includes(user._id)) { %>
+  <button class="text-sm btn btn-primary mb-4 btn-request">
+    Request to be moderator
+  </button>
+  <form
+    class="form-moderator hide mb-4"
+    action="/groups/<%= groupObj._id %>/moderator-request/<%= user._id %>"
+    method="post"
+  >
+    <label for="message" class="form-label">Secret key...</label>
+    <input
+      type="text"
+      id="message"
+      name="message"
+      minlength="8"
+      maxlength="12"
+      class="form-control"
+      required
+    />
+    <button class="btn btn-primary">Submit</button>
+  </form>
+
+  <script>
+    let requestbtn = document.querySelector(".btn-request");
+    requestbtn.addEventListener("click", () => {
+      let moderatorForm = document.querySelector(".form-moderator");
+      moderatorForm.classList.remove("hide");
+      requestbtn.disabled = "true";
+    });
+  </script>
+
+  <% } %>
+
   <!-- <% if(message.success) { %>
 <div class="alert alert-success">
   <% } else { %>
