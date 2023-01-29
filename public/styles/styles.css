@@ -264,6 +264,11 @@ button {
 .text-xsm {
   font-size: 0.8rem;
 }
+
+.normal-text{
+  font-size: 1rem;
+}
+
 .text-sm {
   font-size: 1.2rem;
 }
@@ -288,6 +293,3 @@ hr {
   list-style-type: none;
 }
 
-.numbered-list {
-  list-style-type:;
-}
