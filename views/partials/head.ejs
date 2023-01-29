@@ -74,16 +74,18 @@
         <div class="nav-menu d-flex justify-content-between align-items-center">
           <!-- Menu -->
           <% if(user) { %>
-            <form class="mr-5" action="/logout" method="post">
-              <button class="btn btn-outline-primary" type="submit">
-                Log Out
-              </button>
-            </form>
-            <a class="text-md ml-10 middle" href="/faq">FAQ</a>
+          <form class="mr-5" action="/logout" method="post">
+            <button class="btn btn-outline-primary" type="submit">
+              Log Out
+            </button>
+          </form>
+          <a class="text-md ml-10 middle" href="/faq">FAQ</a>
           <% } else { %>
-            <a class="btn btn-primary mr-5" href="/login">Login</a>
-            <a class="btn btn-secondary" href="/register">Register</a>
-            <a id="faq" class="text-md ml-10 middle link-primary" href="/faq">FAQ</a>
+          <a class="btn btn-primary mr-5" href="/login">Login</a>
+          <a class="btn btn-secondary" href="/register">Register</a>
+          <a id="faq" class="text-md ml-10 middle link-primary" href="/faq"
+            >FAQ</a
+          >
           <!-- <a class="mr-10 btn" href="/login">Login</a> -->
           <!-- <a class="btn" href="/register">Register</a> -->
           <% } %>
