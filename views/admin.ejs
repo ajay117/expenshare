@@ -42,7 +42,9 @@
       </button>
     </div>
 
-    <% if(group.moderatorRequests.length > 0) { %>
+    <% if(group.moderatorRequests.length < 1) { %>
+    <ul class="hide"></ul>
+    <% } %> <% if(group.moderatorRequests.length > 0) { %>
     <ul class="p-0 message-request hide">
       <% group.moderatorRequests.forEach((request, index) => { %>
       <li class="d-flex justify-content-between align-items-center">
@@ -69,10 +71,12 @@
     </ul>
 
     <script>
-      let requestbtn = document.querySelector(".btn-request");
-      requestbtn.addEventListener("click", () => {
-        let messageRequest = document.querySelector(".message-request");
-        messageRequest.classList.toggle("hide");
+      let requestbtnArr = document.querySelectorAll(".btn-request");
+      requestbtnArr.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          let parentDiv = btn.parentElement;
+          parentDiv.nextElementSibling.classList.toggle("hide");
+        });
       });
     </script>
     <% } %>
